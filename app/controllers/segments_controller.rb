@@ -6,6 +6,11 @@ class SegmentsController < ApplicationController
         render json: segments
     end
 
+    def show
+        segment = Segment.find_by(params[:id])
+        render json: segment
+    end
+
     
     def create
         @segment = Segment.create(segment_params)

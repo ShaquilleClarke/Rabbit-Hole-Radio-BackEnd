@@ -6,6 +6,11 @@ class EpisodesController < ApplicationController
         episodes = Episode.all 
         render json: episodes
     end
+
+    def show
+        episode = Episode.find_by(params[:id])
+        render json: episode
+    end
     
     def create
         @episode = Episode.create(episode_params)
@@ -28,4 +33,6 @@ class EpisodesController < ApplicationController
     def episode_params
         params.permit(:title, :user_id, :air_date)
     end
+
+
 end

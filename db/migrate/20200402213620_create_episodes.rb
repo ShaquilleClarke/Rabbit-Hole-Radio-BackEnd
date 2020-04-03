@@ -3,7 +3,7 @@ class CreateEpisodes < ActiveRecord::Migration[6.0]
     create_table :episodes do |t|
       t.string :title
       t.string :air_date
-      t.belongs_to :user, null: false, foreign_key: true
+      t.integer :user_id
       t.timestamps
     end
   end
