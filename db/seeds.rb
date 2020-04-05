@@ -10,8 +10,5 @@ User.destroy_all
 Episode.destroy_all
 Segment.destroy_all
 
-User.create(username: "yeezus sheist", password: "000")
-
-Episode.create(title: "demo", air_date: "1/25/20", user_id: User.first.id)
-
-Segment.create(title: "adzzz", episode_id: Episode.first.id)
+me = User.create(username: "shaq", password: "0077")
+me.episodes.create(title: "whoa dude", air_date: "01/25/25")

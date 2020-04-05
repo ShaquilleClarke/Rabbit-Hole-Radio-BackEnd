@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     else
       render json: {error: "Oh no you diiiddn't"}  
     end
+    
   end
 
   def login
@@ -26,10 +27,11 @@ class UsersController < ApplicationController
         
     if @user && @user.authenticate(params[:password])
       wristband = encode_token({user_id: @user.id})
-      render json: { user: UserSerializer.new(@user), token: wristband }
+      render json: @user
     else 
       render json: {error: "Thats not you!"} 
     end
+    
   end
 
   def persist
