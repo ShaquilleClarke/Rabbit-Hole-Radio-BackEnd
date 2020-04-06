@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.valid? 
-      wristband = encode_token({user_id: @user.id})
+      infoToSaveInBox = {user_id: @user.id}
+      wristband = encode_token(infoToSaveInBox)
       render json: { user: UserSerializer.new(@user), token: wristband }, status: 201
     else
       render json: {error: "Oh no you diiiddn't"}  
@@ -26,8 +27,9 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
         
     if @user && @user.authenticate(params[:password])
-      wristband = encode_token({user_id: @user.id})
-      render json: @user
+      infoToSaveInBox = {user_id: @user.id}
+      wristband = encode_token(infoToSaveInBox)
+      render json: {user: UserSerializer.new(@user), token: wristband}
     else 
       render json: {error: "Thats not you!"} 
     end
@@ -35,7 +37,8 @@ class UsersController < ApplicationController
   end
 
   def persist
-    wristband = encode_token({user_id: @user.id})
+    infoToSaveInBox = {user_id: @user.id}
+    wristband = encode_token(infoToSaveInBox)
     render json: { user: UserSerializer.new(@user), token: wristband }
   end 
 

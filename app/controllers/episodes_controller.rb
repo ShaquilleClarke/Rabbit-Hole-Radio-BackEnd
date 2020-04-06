@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-    before_action :authorized, only: [:persist]
+    before_action :authorized, only: [:create]
 
 
     def index
@@ -13,25 +13,16 @@ class EpisodesController < ApplicationController
     end
     
     def create
-        @episode = Episode.create(episode_params)
-        if @episode.valid?
-            wristband = encode_token({episode_id: @episode.id})
-            render json: { episode: EpisodeSerializer.new(@episode), token: wristband }, status: 201
-        else
-            render json: {error: "Access Denied"}
-        end
+        @episode = @user.episodes.create(episode_params)
+        render json: @episode
     end
 
-    def perist
-        wristband = encode_token({episode_id: @episode.id})
-        render json: { episode: EpisodeSerializer.new(@episode), token: wristband }
-    end
 
 
     private
 
     def episode_params
-        params.permit(:title, :user_id, :air_date)
+        params.permit(:title, :air_date)
     end
 
 
