@@ -14,7 +14,7 @@ class SegmentsController < ApplicationController
     
     def create
         @segment = @episode.segments.create(segment_params)
-        render json: @segment
+        render json: @segment.episode
     end
 
    

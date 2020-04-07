@@ -17,6 +17,9 @@ class EpisodesController < ApplicationController
         render json: @episode
     end
 
+    def destroy
+        Episode.destroy(params[:id])
+    end
 
 
     private
