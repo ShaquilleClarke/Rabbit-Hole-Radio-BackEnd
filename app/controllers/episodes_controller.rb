@@ -18,7 +18,8 @@ class EpisodesController < ApplicationController
     end
 
     def destroy
-        Episode.destroy(params[:id])
+        episode = Episode.destroy(params[:id])
+        render json: episode
     end
 
 
