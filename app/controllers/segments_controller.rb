@@ -1,5 +1,5 @@
 class SegmentsController < ApplicationController
-    before_action :authorized, only: [:create]
+    # before_action :authorized, only: [:create]
     
     def index
         segments = Segment.all.with_attached_song_file
@@ -13,8 +13,13 @@ class SegmentsController < ApplicationController
 
     
     def create
-        @segment = @episode.segments.create(segment_params)
-        render json: @segment.episode
+        segment = Segment.create(segment_params)
+        render json: segment
+    end
+
+    def destroy
+        segment = Segment.destroy(params[:id])
+        render json: segment
     end
 
    
@@ -22,6 +27,6 @@ class SegmentsController < ApplicationController
     private
 
     def segment_params
-        params.permit(:title, :song_file)
+        params.permit(:title, :song_file, :episode_id)
     end
 end
