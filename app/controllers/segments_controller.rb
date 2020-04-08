@@ -27,6 +27,6 @@ class SegmentsController < ApplicationController
     private
 
     def segment_params
-        params.permit(:title, :song_file, :episode_id)
+        params.permit(:song_file, :episode_id)
     end
 end

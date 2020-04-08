@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2020_04_02_213639) do
   end
 
   create_table "segments", force: :cascade do |t|
-    t.string "title"
     t.integer "episode_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
