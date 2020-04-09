@@ -13,10 +13,10 @@ class SegmentsController < ApplicationController
 
     
     def create
+        
         video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
-        @segment = @episode.segments.create(video: video["url"])
-        # byebug
-        render json: @segment
+        segment = Segment.create(video: video["url"], episode_id: params[:episode_id])
+        render json: segment
     end
 
     def destroy
@@ -31,6 +31,6 @@ class SegmentsController < ApplicationController
 
     # def segment_params
     #     video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
-    #     params.permit(:video, :episode_id)
+    #     params.permit(:episode_id, video: video["url"])
     # end
 end

@@ -1,5 +1,5 @@
 class SegmentSerializer < ActiveModel::Serializer
-  attributes :id, :song_file
+  attributes :id, :video
   belongs_to :episode
   
   
