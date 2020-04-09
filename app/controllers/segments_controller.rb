@@ -2,7 +2,7 @@ class SegmentsController < ApplicationController
     # before_action :authorized, only: [:create]
     
     def index
-        segments = Segment.all.with_attached_song_file
+        segments = Segment.all
         render json: segments
     end
 
@@ -13,20 +13,24 @@ class SegmentsController < ApplicationController
 
     
     def create
-        segment = Segment.create(segment_params)
-        render json: segment
+        video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
+        @segment = @episode.segments.create(video: video["url"])
+        # byebug
+        render json: @segment
     end
 
     def destroy
-        segment = Segment.destroy(params[:id])
+        video = Cloudinary::Uploader.destroy(id, :resource_type => :video)
+        segment = Segment.destroy(video)
         render json: segment
     end
 
    
 
-    private
+    # private
 
-    def segment_params
-        params.permit(:song_file, :episode_id)
-    end
+    # def segment_params
+    #     video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
+    #     params.permit(:video, :episode_id)
+    # end
 end
