@@ -3,6 +3,7 @@ class CreateSegments < ActiveRecord::Migration[6.0]
     create_table :segments do |t|
       t.integer :episode_id
       t.string :video
+      t.string :title
       t.timestamps
     end
   end

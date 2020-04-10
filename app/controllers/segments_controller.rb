@@ -13,15 +13,16 @@ class SegmentsController < ApplicationController
 
     
     def create
-        
+        # @episode = Episode.find_by(params[:id])
         video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
-        segment = Segment.create(video: video["url"], episode_id: params[:episode_id])
+        segment = Segment.create(video: video["url"], episode_id: params[:episode_id], title: params[:title])
         render json: segment
     end
 
     def destroy
-        video = Cloudinary::Uploader.destroy(id, :resource_type => :video)
-        segment = Segment.destroy(video)
+        
+        video = Cloudinary::Uploader.destroy(:public_id, :resource_type => "video")
+        segment = Segment.destroy(params[:id])
         render json: segment
     end
 

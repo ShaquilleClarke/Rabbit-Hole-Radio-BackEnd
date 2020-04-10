@@ -3,7 +3,7 @@ class EpisodesController < ApplicationController
 
 
     def index
-        episodes = Episode.all 
+        episodes = Episode.all.segments
         render json: episodes
     end
 
@@ -16,6 +16,12 @@ class EpisodesController < ApplicationController
         @episode = @user.episodes.create(episode_params)
         render json: @episode
     end
+
+    # def persist
+    #     infoToSaveInBox = {episode_id: @episode.id}
+    #     wristband = encode_token(infoToSaveInBox)
+    #     render json: { episode: EpiosdeSerializer.new(@episode), token: wristband }
+    # end 
 
     def destroy
         episode = Episode.destroy(params[:id])

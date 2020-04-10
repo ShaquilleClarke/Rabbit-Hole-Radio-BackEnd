@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_02_213639) do
   create_table "segments", force: :cascade do |t|
     t.integer "episode_id"
     t.string "video"
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
