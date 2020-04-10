@@ -14,7 +14,7 @@ class SegmentsController < ApplicationController
     
     def create
         # @episode = Episode.find_by(params[:id])
-        video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
+        video = Cloudinary::Uploader.upload(params[:video], :resource_type => :raw)
         segment = Segment.create(video: video["url"], episode_id: params[:episode_id], title: params[:title])
         render json: segment
     end
