@@ -3,7 +3,7 @@ class EpisodesController < ApplicationController
 
 
     def index
-        episodes = Episode.all.segments
+        episodes = Episode.all
         render json: episodes
     end
 
